@@ -6,11 +6,15 @@
 package gt.umg.viaje.entities;
 
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -30,8 +34,11 @@ public class Invoice implements java.io.Serializable {
     
     private String address;
     
-    @ManyToOne
+    @ManyToOne()
     private Person person;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<InvoiceDetail> invoiceDetails;
     
     @Temporal(TemporalType.DATE)
     private Date date;
@@ -47,11 +54,12 @@ public class Invoice implements java.io.Serializable {
     public Invoice() {
     }
 
-    public Invoice(Integer id, String nit, String address, Person person, Date date, Float total, Float tax, String url, Boolean active) {
+    public Invoice(Integer id, String nit, String address, Person person, List<InvoiceDetail> invoiceDetails, Date date, Float total, Float tax, String url, Boolean active) {
         this.id = id;
         this.nit = nit;
         this.address = address;
         this.person = person;
+        this.invoiceDetails = invoiceDetails;
         this.date = date;
         this.total = total;
         this.tax = tax;
@@ -89,6 +97,14 @@ public class Invoice implements java.io.Serializable {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public List<InvoiceDetail> getInvoiceDetails() {
+        return invoiceDetails;
+    }
+
+    public void setInvoiceDetails(List<InvoiceDetail> invoiceDetails) {
+        this.invoiceDetails = invoiceDetails;
     }
 
     public Date getDate() {
@@ -130,5 +146,6 @@ public class Invoice implements java.io.Serializable {
     public void setActive(Boolean active) {
         this.active = active;
     }
- 
+
+    
 }
