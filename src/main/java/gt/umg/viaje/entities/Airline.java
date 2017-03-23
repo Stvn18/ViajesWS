@@ -16,28 +16,22 @@ import javax.persistence.Id;
  */
 
 @Entity()
-public class FlightClass implements java.io.Serializable {
+public class Airline implements java.io.Serializable{
     
     @Id()
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     
-    private String description;
-    
-    private String category;
-    
-    private Float extra;
+    private String airline;
     
     private Boolean active;
 
-    public FlightClass() {
+    public Airline() {
     }
 
-    public FlightClass(Integer id, String description, String category, Float extra, Boolean active) {
+    public Airline(Integer id, String airline, Boolean active) {
         this.id = id;
-        this.description = description;
-        this.category = category;
-        this.extra = extra;
+        this.airline = airline;
         this.active = active;
     }
 
@@ -49,28 +43,12 @@ public class FlightClass implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getAirline() {
+        return airline;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public Float getExtra() {
-        return extra;
-    }
-
-    public void setExtra(Float extra) {
-        this.extra = extra;
+    public void setAirline(String airline) {
+        this.airline = airline;
     }
 
     public Boolean getActive() {
@@ -80,5 +58,5 @@ public class FlightClass implements java.io.Serializable {
     public void setActive(Boolean active) {
         this.active = active;
     }
-     
+    
 }
