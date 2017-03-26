@@ -5,11 +5,14 @@
  */
 package gt.umg.viaje.entities;
 
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -17,22 +20,26 @@ import javax.persistence.Id;
  */
 
 @Entity()
-public class PaymentType implements java.io.Serializable {
+public class Package implements java.io.Serializable {
     
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    private String payment;
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    
+    private Float total;
     
     private Boolean active;
 
-    public PaymentType() {
+    public Package() {
     }
 
-    public PaymentType(Integer id, String payment, Boolean active) {
+    public Package(Integer id, Date date, Float total, Boolean active) {
         this.id = id;
-        this.payment = payment;
+        this.date = date;
+        this.total = total;
         this.active = active;
     }
 
@@ -44,12 +51,20 @@ public class PaymentType implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getPayment() {
-        return payment;
+    public Date getDate() {
+        return date;
     }
 
-    public void setPayment(String payment) {
-        this.payment = payment;
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
     }
 
     public Boolean getActive() {
@@ -62,10 +77,11 @@ public class PaymentType implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.payment);
-        hash = 97 * hash + Objects.hashCode(this.active);
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.date);
+        hash = 29 * hash + Objects.hashCode(this.total);
+        hash = 29 * hash + Objects.hashCode(this.active);
         return hash;
     }
 
@@ -80,11 +96,14 @@ public class PaymentType implements java.io.Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final PaymentType other = (PaymentType) obj;
-        if (!Objects.equals(this.payment, other.payment)) {
+        final Package other = (Package) obj;
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        if (!Objects.equals(this.total, other.total)) {
             return false;
         }
         if (!Objects.equals(this.active, other.active)) {
@@ -95,8 +114,7 @@ public class PaymentType implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "PaymentType{" + "id=" + id + ", payment=" + payment + ", active=" + active + '}';
+        return "Package{" + "id=" + id + ", date=" + date + ", total=" + total + ", active=" + active + '}';
     }
-    
     
 }

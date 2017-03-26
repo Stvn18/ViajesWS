@@ -5,6 +5,7 @@
  */
 package gt.umg.viaje.entities;
 
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,14 +13,14 @@ import javax.persistence.Id;
 
 /**
  *
- * @author Steven
+ * @author steven.vargas
  */
 
 @Entity()
-public class PersonType implements java.io.Serializable{
+public class PersonType implements java.io.Serializable {
     
     @Id()
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     private String type;
@@ -58,5 +59,42 @@ public class PersonType implements java.io.Serializable{
     public void setActive(Boolean active) {
         this.active = active;
     }
-        
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 13 * hash + Objects.hashCode(this.id);
+        hash = 13 * hash + Objects.hashCode(this.type);
+        hash = 13 * hash + Objects.hashCode(this.active);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PersonType other = (PersonType) obj;
+        if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.active, other.active)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonType{" + "id=" + id + ", type=" + type + ", active=" + active + '}';
+    }   
 }

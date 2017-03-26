@@ -5,56 +5,48 @@
  */
 package gt.umg.viaje.entities;
 
-import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
- * @author Steven
+ * @author steven.vargas
  */
 
 @Entity()
-public class InvoiceDetail implements java.io.Serializable{
+public class InvoiceDetail implements java.io.Serializable {
     
     @Id()
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn()
+    private Invoice invoice;
     
     private Integer quantity;
     
-    private String description;
-    
-    private Float subtotal;
-    
-    private Float total;
-    
-    @OneToOne(fetch = FetchType.EAGER, cascade={CascadeType.PERSIST,CascadeType.REMOVE}, optional=false,orphanRemoval=true)
-    private PaymentType paymentType;
-    
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<PacketHeader> packetHeader;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn()
+    private Package pack;
     
     private Boolean active;
 
     public InvoiceDetail() {
     }
 
-    public InvoiceDetail(Integer id, Integer quantity, String description, Float subtotal, Float total, PaymentType paymentType, List<PacketHeader> packetHeader, Boolean active) {
+    public InvoiceDetail(Integer id, Invoice invoice, Integer quantity, Package pack, Boolean active) {
         this.id = id;
+        this.invoice = invoice;
         this.quantity = quantity;
-        this.description = description;
-        this.subtotal = subtotal;
-        this.total = total;
-        this.paymentType = paymentType;
-        this.packetHeader = packetHeader;
+        this.pack = pack;
         this.active = active;
     }
 
@@ -66,6 +58,14 @@ public class InvoiceDetail implements java.io.Serializable{
         this.id = id;
     }
 
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
     public Integer getQuantity() {
         return quantity;
     }
@@ -74,44 +74,12 @@ public class InvoiceDetail implements java.io.Serializable{
         this.quantity = quantity;
     }
 
-    public String getDescription() {
-        return description;
+    public Package getPack() {
+        return pack;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Float getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(Float subtotal) {
-        this.subtotal = subtotal;
-    }
-
-    public Float getTotal() {
-        return total;
-    }
-
-    public void setTotal(Float total) {
-        this.total = total;
-    }
-
-    public PaymentType getPaymentType() {
-        return paymentType;
-    }
-
-    public void setPaymentType(PaymentType paymentType) {
-        this.paymentType = paymentType;
-    }
-
-    public List<PacketHeader> getPacketHeader() {
-        return packetHeader;
-    }
-
-    public void setPacketHeader(List<PacketHeader> packetHeader) {
-        this.packetHeader = packetHeader;
+    public void setPack(Package pack) {
+        this.pack = pack;
     }
 
     public Boolean getActive() {
@@ -121,6 +89,50 @@ public class InvoiceDetail implements java.io.Serializable{
     public void setActive(Boolean active) {
         this.active = active;
     }
-    
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.invoice);
+        hash = 41 * hash + Objects.hashCode(this.quantity);
+        hash = 41 * hash + Objects.hashCode(this.pack);
+        hash = 41 * hash + Objects.hashCode(this.active);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final InvoiceDetail other = (InvoiceDetail) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.invoice, other.invoice)) {
+            return false;
+        }
+        if (!Objects.equals(this.quantity, other.quantity)) {
+            return false;
+        }
+        if (!Objects.equals(this.pack, other.pack)) {
+            return false;
+        }
+        if (!Objects.equals(this.active, other.active)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "InvoiceDetail{" + "id=" + id + ", invoice=" + invoice + ", quantity=" + quantity + ", pack=" + pack + ", active=" + active + '}';
+    }   
 }

@@ -7,8 +7,8 @@ package gt.umg.viaje.entities;
 
 /**
  *
- * @author Steven
+ * @author steven.vargas
  */
-public class Room {
+public class ProviderDetail {
     
 }

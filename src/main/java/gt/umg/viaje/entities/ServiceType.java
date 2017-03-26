@@ -9,6 +9,6 @@ package gt.umg.viaje.entities;
  *
  * @author steven.vargas
  */
-public class RolUser {
+public class ServiceType {
     
 }
