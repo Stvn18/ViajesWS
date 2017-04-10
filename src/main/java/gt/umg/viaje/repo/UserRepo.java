@@ -24,6 +24,7 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     
     Integer findById(Integer id);
     
-    User findByUser(String user);
+    User findByUser(User user);
+    
     
 }

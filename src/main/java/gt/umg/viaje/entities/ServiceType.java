@@ -96,7 +96,5 @@ public class ServiceType implements java.io.Serializable{
     @Override
     public String toString() {
         return "ServiceType{" + "id=" + id + ", serviceType=" + serviceType + ", active=" + active + '}';
-    }
-    
-    
+    }   
 }

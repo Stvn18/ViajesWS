@@ -13,7 +13,7 @@ public class Session {
     
     public boolean isSessionValid(String token, Integer userId) throws Exception {
         
-        UserSession usuarioSesion = userSessionRepo.findByTokenAndUsuario(token, new User());
+        UserSession usuarioSesion = userSessionRepo.findByTokenAndUser(token, new User());
         
         if(usuarioSesion == null){
             return false;

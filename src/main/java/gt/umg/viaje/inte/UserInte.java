@@ -31,7 +31,7 @@ public interface UserInte {
     @Transactional(readOnly = true)
     @RequestMapping(value = "/findByUser", method = RequestMethod.GET)
     public ResponseEntity<User> findByUser(
-            @RequestParam(value = "user") String user
+            @RequestParam(value = "user") User user
     ) throws Exception;
     
     @Transactional()

@@ -96,7 +96,5 @@ public class PaymentType implements java.io.Serializable {
     @Override
     public String toString() {
         return "PaymentType{" + "id=" + id + ", payment=" + payment + ", active=" + active + '}';
-    }
-    
-    
+    } 
 }

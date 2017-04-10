@@ -18,6 +18,6 @@ import org.springframework.stereotype.Repository;
 @Repository()
 public interface UserSessionRepo extends JpaRepository<UserSession, Integer> {
     
-    UserSession findByTokenAndUsuario(String token, User user);
+    UserSession findByTokenAndUser(String token, User user);
     
 }
