@@ -34,8 +34,6 @@ public class User implements java.io.Serializable {
     
     private String name;
     
-    private String user;
-    
     private String password;
     
     @Temporal(TemporalType.DATE)
@@ -54,10 +52,9 @@ public class User implements java.io.Serializable {
     public User() {
     }
 
-    public User(Integer id, String name, String user, String password, Date dateCreated, RolUser rolUser, Person person, Boolean active) {
+    public User(Integer id, String name, String password, Date dateCreated, RolUser rolUser, Person person, Boolean active) {
         this.id = id;
         this.name = name;
-        this.user = user;
         this.password = password;
         this.dateCreated = dateCreated;
         this.rolUser = rolUser;
@@ -79,14 +76,6 @@ public class User implements java.io.Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 
     public String getPassword() {
@@ -134,7 +123,6 @@ public class User implements java.io.Serializable {
         int hash = 3;
         hash = 43 * hash + Objects.hashCode(this.id);
         hash = 43 * hash + Objects.hashCode(this.name);
-        hash = 43 * hash + Objects.hashCode(this.user);
         hash = 43 * hash + Objects.hashCode(this.password);
         hash = 43 * hash + Objects.hashCode(this.dateCreated);
         hash = 43 * hash + Objects.hashCode(this.rolUser);
@@ -156,9 +144,6 @@ public class User implements java.io.Serializable {
         }
         final User other = (User) obj;
         if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.user, other.user)) {
             return false;
         }
         if (!Objects.equals(this.password, other.password)) {
@@ -184,7 +169,6 @@ public class User implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", user=" + user + ", password=" + password + ", dateCreated=" + dateCreated + ", rolUser=" + rolUser + ", person=" + person + ", active=" + active + '}';
-    }
-    
+        return "User{" + "id=" + id + ", name=" + name + ", password=" + password + ", dateCreated=" + dateCreated + ", rolUser=" + rolUser + ", person=" + person + ", active=" + active + '}';
+    }    
 }

@@ -29,9 +29,9 @@ public interface UserInte {
     public ResponseEntity<User> findAll() throws Exception;
     
     @Transactional(readOnly = true)
-    @RequestMapping(value = "/findByUser", method = RequestMethod.GET)
-    public ResponseEntity<User> findByUser(
-            @RequestParam(value = "user") User user
+    @RequestMapping(value = "/findByName", method = RequestMethod.GET)
+    public ResponseEntity<User> findByName(
+            @RequestParam(value = "name") String name
     ) throws Exception;
     
     @Transactional()
@@ -40,6 +40,5 @@ public interface UserInte {
             @RequestParam(value = "token", defaultValue = "") String token,
             @RequestParam(value = "userId", defaultValue = "0") Integer userId,
             @RequestBody() User user
-    ) throws Exception;
-    
+    ) throws Exception;   
 }

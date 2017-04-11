@@ -38,7 +38,7 @@ public interface UserSessionInte {
     @Transactional()
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ResponseEntity<UserSession> login(
-            @RequestParam(value = "user", defaultValue = "") String user,
+            @RequestParam(value = "name", defaultValue = "") String name,
             @RequestParam(value = "pass", defaultValue = "") String pass
     ) throws Exception;
 

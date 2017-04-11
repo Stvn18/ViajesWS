@@ -33,25 +33,23 @@ public class UserImpl implements UserInte {
     }
 
     @Override
-    public ResponseEntity<User> findByUser(User user) throws Exception {
-        User user1 = userRepo.findByUser(user);
+    public ResponseEntity<User> findByName(String name) throws Exception {
+        User user = userRepo.findByName(name);
 
-        if ("".equals(user) || user1 == null) {
+        if (user == null) {
             return new ResponseEntity("El Usuario No Existe!", HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity(user1, HttpStatus.OK);
+            return new ResponseEntity(user, HttpStatus.OK);
         }
+
     }
 
     @Override
     public ResponseEntity doCreate(String token, Integer userId, User user) throws Exception {
 
-        User users = userRepo.findByUser(user);
+        User users = userRepo.findByName(user.getName());
 
         if ("".equals(user.getName()) || user.getName() == null) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-        if ("".equals(user.getUser()) || user.getUser() == null) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
         if ("".equals(user.getPassword()) || user.getPassword() == null) {

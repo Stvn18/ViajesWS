@@ -45,9 +45,9 @@ public class UserSessionImpl implements UserSessionInte {
     }
 
     @Override
-    public ResponseEntity<UserSession> login(String user, String pass) throws Exception {
+    public ResponseEntity<UserSession> login(String name, String pass) throws Exception {
         
-        User user1 = userRepo.findByUser(user);
+        User user1 = userRepo.findByName(name);
         UserSession userSession = new UserSession();
         Date date = new Date();
         
@@ -55,7 +55,7 @@ public class UserSessionImpl implements UserSessionInte {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         
-        if("".equals(user)){
+        if("".equals(name)){
            return new ResponseEntity(HttpStatus.BAD_REQUEST); 
         }
         
