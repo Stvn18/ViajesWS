@@ -54,6 +54,7 @@ public class RootContext {
     private static final String PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY = "app.hibernate.ejb.naming_strategy";
     private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "app.hibernate.show_sql";
     private static final String PROPERTY_NAME_HIBERNATE_GENERATE_STATICS = "app.hibernate.generate_statistics";
+    private static final String PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO = "app.hibernate.hbm2ddl.auto";
 
     private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "app.entitymanager.packages.to.scan";
 
@@ -101,7 +102,8 @@ public class RootContext {
         jpaProterties.put("hibernate.format_sql", environment.getRequiredProperty(PROPERTY_NAME_HIBERNATE_FORMAT_SQL));
         jpaProterties.put("hibernate.ejb.naming_strategy", environment.getRequiredProperty(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY));
         jpaProterties.put("hibernate.show_sql", environment.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
-        jpaProterties.put(PROPERTY_NAME_HIBERNATE_GENERATE_STATICS, environment.getRequiredProperty(PROPERTY_NAME_HIBERNATE_GENERATE_STATICS));
+        jpaProterties.put("hibernate.generate_statistics", environment.getRequiredProperty(PROPERTY_NAME_HIBERNATE_GENERATE_STATICS));
+        jpaProterties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO));
 
         entityManagerFactoryBean.setJpaProperties(jpaProterties);
         entityManagerFactoryBean.afterPropertiesSet();

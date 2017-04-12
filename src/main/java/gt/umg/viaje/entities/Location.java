@@ -16,25 +16,29 @@ import javax.persistence.Table;
  *
  * @author steven.vargas
  */
-
 @Entity()
 @Table()
 public class Location implements java.io.Serializable {
+
+    private static final long serialVersionUID = 4605288689310238084L;
     
-     @Id()
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Integer id;
-     
-     private String description;
-     
-     private Boolean active;
+    @Id()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    
+    private String locationName;
+    
+    private String graphicCoordinates;
+    
+    private boolean active;
 
     public Location() {
     }
-
-    public Location(Integer id, String description, Boolean active) {
+    
+    public Location(Integer id, String locationName, String graphicCoordinates, boolean active) {
         this.id = id;
-        this.description = description;
+        this.locationName = locationName;
+        this.graphicCoordinates = graphicCoordinates;
         this.active = active;
     }
 
@@ -46,28 +50,37 @@ public class Location implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
-    public Boolean getActive() {
+    public String getGraphicCoordinates() {
+        return graphicCoordinates;
+    }
+
+    public void setGraphicCoordinates(String graphicCoordinates) {
+        this.graphicCoordinates = graphicCoordinates;
+    }
+
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.description);
-        hash = 89 * hash + Objects.hashCode(this.active);
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.locationName);
+        hash = 59 * hash + Objects.hashCode(this.graphicCoordinates);
+        hash = 59 * hash + (this.active ? 1 : 0);
         return hash;
     }
 
@@ -83,20 +96,21 @@ public class Location implements java.io.Serializable {
             return false;
         }
         final Location other = (Location) obj;
-        if (!Objects.equals(this.description, other.description)) {
+        if (this.active != other.active) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.locationName, other.locationName)) {
             return false;
         }
-        if (!Objects.equals(this.active, other.active)) {
+        if (!Objects.equals(this.graphicCoordinates, other.graphicCoordinates)) {
             return false;
         }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "Location{" + "id=" + id + ", description=" + description + ", active=" + active + '}';
-    }  
+        return "Location{" + "id=" + id + ", locationName=" + locationName + ", graphicCoordinates=" + graphicCoordinates + ", active=" + active + '}';
+    }
+    
 }

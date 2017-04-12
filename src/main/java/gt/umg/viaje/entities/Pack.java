@@ -22,29 +22,31 @@ import javax.persistence.TemporalType;
 
 @Entity()
 @Table()
-public class Package implements java.io.Serializable {
+public class Pack implements java.io.Serializable {
+
+    private static final long serialVersionUID = 1080937740027706302L;
     
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
     
     private Float total;
     
-    private Boolean active;
+    private boolean active;
 
-    public Package() {
+    public Pack() {
     }
 
-    public Package(Integer id, Date date, Float total, Boolean active) {
+    public Pack(Integer id, Date createdAt, Float total, Boolean active) {
         this.id = id;
-        this.date = date;
+        this.createdAt = createdAt;
         this.total = total;
         this.active = active;
     }
-
+    
     public Integer getId() {
         return id;
     }
@@ -53,14 +55,14 @@ public class Package implements java.io.Serializable {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
-
+    
     public Float getTotal() {
         return total;
     }
@@ -69,22 +71,21 @@ public class Package implements java.io.Serializable {
         this.total = total;
     }
 
-    public Boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 29 * hash + Objects.hashCode(this.id);
-        hash = 29 * hash + Objects.hashCode(this.date);
+        hash = 29 * hash + Objects.hashCode(this.createdAt);
         hash = 29 * hash + Objects.hashCode(this.total);
-        hash = 29 * hash + Objects.hashCode(this.active);
-        return hash;
+        return 29 * hash + Objects.hashCode(this.active);
     }
 
     @Override
@@ -98,25 +99,22 @@ public class Package implements java.io.Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Package other = (Package) obj;
+        final Pack other = (Pack) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.date, other.date)) {
+        if (!Objects.equals(this.createdAt, other.createdAt)) {
             return false;
         }
         if (!Objects.equals(this.total, other.total)) {
             return false;
         }
-        if (!Objects.equals(this.active, other.active)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.active, other.active);
     }
 
     @Override
     public String toString() {
-        return "Package{" + "id=" + id + ", date=" + date + ", total=" + total + ", active=" + active + '}';
+        return "Package{" + "id=" + id + ", date=" + createdAt + ", total=" + total + ", active=" + active + '}';
     }
     
 }

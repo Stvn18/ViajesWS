@@ -23,7 +23,9 @@ import javax.persistence.Table;
 
 @Entity()
 @Table()
-public class PackageDetail implements java.io.Serializable{
+public class PackDetail implements java.io.Serializable{
+
+    private static final long serialVersionUID = 5658208408155758051L;
     
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,24 +33,24 @@ public class PackageDetail implements java.io.Serializable{
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn()
-    private Package packD;
+    private Pack pack;
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn()
-    private ProviderDetail providerDetail;
+    private ProviderService providerDetail;
     
     private Float total;
     
     private Float discount;
     
-    private Boolean active;
+    private boolean active;
 
-    public PackageDetail() {
+    public PackDetail() {
     }
 
-    public PackageDetail(Integer id, Package packD, ProviderDetail providerDetail, Float total, Float discount, Boolean active) {
+    public PackDetail(Integer id, Pack pack, ProviderService providerDetail, Float total, Float discount, boolean active) {
         this.id = id;
-        this.packD = packD;
+        this.pack = pack;
         this.providerDetail = providerDetail;
         this.total = total;
         this.discount = discount;
@@ -63,19 +65,19 @@ public class PackageDetail implements java.io.Serializable{
         this.id = id;
     }
 
-    public Package getPackD() {
-        return packD;
+    public Pack getPack() {
+        return pack;
     }
 
-    public void setPackD(Package packD) {
-        this.packD = packD;
+    public void setPack(Pack pack) {
+        this.pack = pack;
     }
 
-    public ProviderDetail getProviderDetail() {
+    public ProviderService getProviderDetail() {
         return providerDetail;
     }
 
-    public void setProviderDetail(ProviderDetail providerDetail) {
+    public void setProviderDetail(ProviderService providerDetail) {
         this.providerDetail = providerDetail;
     }
 
@@ -95,24 +97,23 @@ public class PackageDetail implements java.io.Serializable{
         this.discount = discount;
     }
 
-    public Boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 41 * hash + Objects.hashCode(this.id);
-        hash = 41 * hash + Objects.hashCode(this.packD);
+        hash = 41 * hash + Objects.hashCode(this.pack);
         hash = 41 * hash + Objects.hashCode(this.providerDetail);
         hash = 41 * hash + Objects.hashCode(this.total);
         hash = 41 * hash + Objects.hashCode(this.discount);
-        hash = 41 * hash + Objects.hashCode(this.active);
-        return hash;
+        return 41 * hash + Objects.hashCode(this.active);
     }
 
     @Override
@@ -126,11 +127,11 @@ public class PackageDetail implements java.io.Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final PackageDetail other = (PackageDetail) obj;
+        final PackDetail other = (PackDetail) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.packD, other.packD)) {
+        if (!Objects.equals(this.pack, other.pack)) {
             return false;
         }
         if (!Objects.equals(this.providerDetail, other.providerDetail)) {
@@ -142,15 +143,12 @@ public class PackageDetail implements java.io.Serializable{
         if (!Objects.equals(this.discount, other.discount)) {
             return false;
         }
-        if (!Objects.equals(this.active, other.active)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.active, other.active);
     }
 
     @Override
     public String toString() {
-        return "PackageDetail{" + "id=" + id + ", packD=" + packD + ", providerDetail=" + providerDetail + ", total=" + total + ", discount=" + discount + ", active=" + active + '}';
+        return "PackageDetail{" + "id=" + id + ", packD=" + pack + ", providerDetail=" + providerDetail + ", total=" + total + ", discount=" + discount + ", active=" + active + '}';
     }
     
 }

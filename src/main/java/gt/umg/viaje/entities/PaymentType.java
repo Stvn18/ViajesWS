@@ -20,21 +20,23 @@ import javax.persistence.Table;
 @Entity()
 @Table()
 public class PaymentType implements java.io.Serializable {
+
+    private static final long serialVersionUID = -231391740474990969L;
     
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    private String payment;
+    private String paymentName;
     
     private Boolean active;
 
     public PaymentType() {
     }
 
-    public PaymentType(Integer id, String payment, Boolean active) {
+    public PaymentType(Integer id, String paymentName, Boolean active) {
         this.id = id;
-        this.payment = payment;
+        this.paymentName = paymentName;
         this.active = active;
     }
 
@@ -46,14 +48,14 @@ public class PaymentType implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getPayment() {
-        return payment;
+    public String getPaymentName() {
+        return paymentName;
     }
 
-    public void setPayment(String payment) {
-        this.payment = payment;
+    public void setPaymentName(String paymentName) {
+        this.paymentName = paymentName;
     }
-
+    
     public Boolean getActive() {
         return active;
     }
@@ -66,7 +68,7 @@ public class PaymentType implements java.io.Serializable {
     public int hashCode() {
         int hash = 3;
         hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.payment);
+        hash = 97 * hash + Objects.hashCode(this.paymentName);
         hash = 97 * hash + Objects.hashCode(this.active);
         return hash;
     }
@@ -83,20 +85,17 @@ public class PaymentType implements java.io.Serializable {
             return false;
         }
         final PaymentType other = (PaymentType) obj;
-        if (!Objects.equals(this.payment, other.payment)) {
+        if (!Objects.equals(this.paymentName, other.paymentName)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.active, other.active)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.active, other.active);
     }
 
     @Override
     public String toString() {
-        return "PaymentType{" + "id=" + id + ", payment=" + payment + ", active=" + active + '}';
+        return "PaymentType{" + "id=" + id + ", payment=" + paymentName + ", active=" + active + '}';
     } 
 }

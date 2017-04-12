@@ -19,22 +19,24 @@ import javax.persistence.Table;
 
 @Entity()
 @Table()
-public class RolUser implements java.io.Serializable {
+public class ProviderServiceType implements java.io.Serializable{
+
+    private static final long serialVersionUID = 3386490605831866998L;
     
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    private String rol;
+    private String serviceTypeName;
     
-    private Boolean active;
+    private boolean active;
 
-    public RolUser() {
+    public ProviderServiceType() {
     }
 
-    public RolUser(Integer id, String rol, Boolean active) {
+    public ProviderServiceType(Integer id, String serviceTypeName, boolean active) {
         this.id = id;
-        this.rol = rol;
+        this.serviceTypeName = serviceTypeName;
         this.active = active;
     }
 
@@ -46,28 +48,28 @@ public class RolUser implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getRol() {
-        return rol;
+    public String getServiceTypeName() {
+        return serviceTypeName;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setServiceTypeName(String serviceTypeName) {
+        this.serviceTypeName = serviceTypeName;
     }
 
-    public Boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 73 * hash + Objects.hashCode(this.id);
-        hash = 73 * hash + Objects.hashCode(this.rol);
-        hash = 73 * hash + Objects.hashCode(this.active);
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.serviceTypeName);
+        hash = 97 * hash + (this.active ? 1 : 0);
         return hash;
     }
 
@@ -82,23 +84,19 @@ public class RolUser implements java.io.Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final RolUser other = (RolUser) obj;
-        if (!Objects.equals(this.rol, other.rol)) {
+        final ProviderServiceType other = (ProviderServiceType) obj;
+        if (this.active != other.active) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.serviceTypeName, other.serviceTypeName)) {
             return false;
         }
-        if (!Objects.equals(this.active, other.active)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "RolUser{" + "id=" + id + ", rol=" + rol + ", active=" + active + '}';
+        return "ProviderServiceType{" + "id=" + id + ", serviceTypeName=" + serviceTypeName + ", active=" + active + '}';
     }
-
     
 }

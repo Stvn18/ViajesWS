@@ -20,21 +20,23 @@ import javax.persistence.Table;
 @Entity()
 @Table()
 public class SpecificationType implements java.io.Serializable {
+
+    private static final long serialVersionUID = 3736409369502768591L;
     
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    private String description;
+    private String specificationName;
     
-    private Boolean active;
+    private boolean active;
 
     public SpecificationType() {
     }
 
-    public SpecificationType(Integer id, String description, Boolean active) {
+    public SpecificationType(Integer id, String specificationName, boolean active) {
         this.id = id;
-        this.description = description;
+        this.specificationName = specificationName;
         this.active = active;
     }
 
@@ -46,28 +48,28 @@ public class SpecificationType implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSpecificationName() {
+        return specificationName;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSpecificationName(String specificationName) {
+        this.specificationName = specificationName;
     }
 
-    public Boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        hash = 37 * hash + Objects.hashCode(this.description);
-        hash = 37 * hash + Objects.hashCode(this.active);
+        int hash = 7;
+        hash = 13 * hash + Objects.hashCode(this.id);
+        hash = 13 * hash + Objects.hashCode(this.specificationName);
+        hash = 13 * hash + (this.active ? 1 : 0);
         return hash;
     }
 
@@ -83,22 +85,18 @@ public class SpecificationType implements java.io.Serializable {
             return false;
         }
         final SpecificationType other = (SpecificationType) obj;
-        if (!Objects.equals(this.description, other.description)) {
+        if (this.active != other.active) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.specificationName, other.specificationName)) {
             return false;
         }
-        if (!Objects.equals(this.active, other.active)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "SpecificationType{" + "id=" + id + ", description=" + description + ", active=" + active + '}';
+        return "SpecificationType{" + "id=" + id + ", specificationName=" + specificationName + ", active=" + active + '}';
     }
     
-        
 }

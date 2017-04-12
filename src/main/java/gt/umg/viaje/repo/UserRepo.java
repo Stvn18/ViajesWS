@@ -6,7 +6,6 @@
 package gt.umg.viaje.repo;
 
 import gt.umg.viaje.entities.User;
-import java.io.Serializable;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -23,8 +22,6 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     List <User> findAll();
     
     Integer findById(Integer id);
-    
-    User findByName(String name);
     
     
 }

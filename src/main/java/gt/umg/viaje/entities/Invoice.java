@@ -7,7 +7,6 @@ package gt.umg.viaje.entities;
 
 import java.util.Date;
 import java.util.Objects;
-import java.util.logging.Logger;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +25,8 @@ import javax.persistence.TemporalType;
 @Entity()
 @Table()
 public class Invoice implements java.io.Serializable {
+
+    private static final long serialVersionUID = 23256028518132415L;
     
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,8 +39,8 @@ public class Invoice implements java.io.Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private User user;
     
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
     
     private Float total;
     
@@ -50,17 +51,17 @@ public class Invoice implements java.io.Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private PaymentType paymentType;
     
-    private Boolean active;
+    private boolean active;
 
     public Invoice() {
     }
 
-    public Invoice(Integer id, String nit, String address, User user, Date date, Float total, Float tax, String url, PaymentType paymentType, Boolean active) {
+    public Invoice(Integer id, String nit, String address, User user, Date createdAt, Float total, Float tax, String url, PaymentType paymentType, Boolean active) {
         this.id = id;
         this.nit = nit;
         this.address = address;
         this.user = user;
-        this.date = date;
+        this.createdAt = createdAt;
         this.total = total;
         this.tax = tax;
         this.url = url;
@@ -100,14 +101,14 @@ public class Invoice implements java.io.Serializable {
         this.user = user;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
-
+    
     public Float getTotal() {
         return total;
     }
@@ -140,28 +141,27 @@ public class Invoice implements java.io.Serializable {
         this.paymentType = paymentType;
     }
 
-    public Boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
-
+    
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + Objects.hashCode(this.id);
-        hash = 23 * hash + Objects.hashCode(this.nit);
-        hash = 23 * hash + Objects.hashCode(this.address);
-        hash = 23 * hash + Objects.hashCode(this.user);
-        hash = 23 * hash + Objects.hashCode(this.date);
-        hash = 23 * hash + Objects.hashCode(this.total);
-        hash = 23 * hash + Objects.hashCode(this.tax);
-        hash = 23 * hash + Objects.hashCode(this.url);
-        hash = 23 * hash + Objects.hashCode(this.paymentType);
-        hash = 23 * hash + Objects.hashCode(this.active);
-        return hash;
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.nit);
+        hash = 29 * hash + Objects.hashCode(this.address);
+        hash = 29 * hash + Objects.hashCode(this.user);
+        hash = 29 * hash + Objects.hashCode(this.createdAt);
+        hash = 29 * hash + Objects.hashCode(this.total);
+        hash = 29 * hash + Objects.hashCode(this.tax);
+        hash = 29 * hash + Objects.hashCode(this.url);
+        hash = 29 * hash + Objects.hashCode(this.paymentType);
+        return 29 * hash + Objects.hashCode(this.active);
     }
 
     @Override
@@ -191,7 +191,7 @@ public class Invoice implements java.io.Serializable {
         if (!Objects.equals(this.user, other.user)) {
             return false;
         }
-        if (!Objects.equals(this.date, other.date)) {
+        if (!Objects.equals(this.createdAt, other.createdAt)) {
             return false;
         }
         if (!Objects.equals(this.total, other.total)) {
@@ -203,14 +203,12 @@ public class Invoice implements java.io.Serializable {
         if (!Objects.equals(this.paymentType, other.paymentType)) {
             return false;
         }
-        if (!Objects.equals(this.active, other.active)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.active, other.active);
     }
 
     @Override
     public String toString() {
-        return "Invoice{" + "id=" + id + ", nit=" + nit + ", address=" + address + ", user=" + user + ", date=" + date + ", total=" + total + ", tax=" + tax + ", url=" + url + ", paymentType=" + paymentType + ", active=" + active + '}';
-    }   
+        return "Invoice{" + "id=" + id + ", nit=" + nit + ", address=" + address + ", user=" + user + ", creationAt=" + createdAt + ", total=" + total + ", tax=" + tax + ", url=" + url + ", paymentType=" + paymentType + ", active=" + active + '}';
+    }
+    
 }

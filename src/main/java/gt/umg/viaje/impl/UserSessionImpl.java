@@ -47,40 +47,7 @@ public class UserSessionImpl implements UserSessionInte {
     @Override
     public ResponseEntity<UserSession> login(String name, String pass) throws Exception {
         
-        User user1 = userRepo.findByName(name);
-        UserSession userSession = new UserSession();
-        Date date = new Date();
-        
-        if(user1 == null){
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-        
-        if("".equals(name)){
-           return new ResponseEntity(HttpStatus.BAD_REQUEST); 
-        }
-        
-        if("".equals(pass)){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-        
-        String encryptPass = Md5Encrypt.get_md5(pass);
-        
-        if(!user1.getPassword().equals(encryptPass)){
-            return new ResponseEntity(HttpStatus.ACCEPTED);
-        }
-        
-        String infoToken = Integer.toString(user1.getId()) + Long.toString(date.getTime());
-        
-        String token = Md5Encrypt.get_md5(infoToken);
-        
-        userSession.setToken(token);
-        userSession.setStartDate(date);
-        userSession.setEndDate(date);
-        userSession.setUser(user1);
-        
-        userSessionRepo.save(userSession);
-        
-        return new ResponseEntity(userSession, HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
 }

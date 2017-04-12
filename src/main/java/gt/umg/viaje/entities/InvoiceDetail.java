@@ -24,6 +24,8 @@ import javax.persistence.Table;
 @Entity()
 @Table()
 public class InvoiceDetail implements java.io.Serializable {
+
+    private static final long serialVersionUID = -5216497945705017438L;
     
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,14 +39,14 @@ public class InvoiceDetail implements java.io.Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn()
-    private Package pack;
+    private Pack pack;
     
-    private Boolean active;
+    private boolean active;
 
     public InvoiceDetail() {
     }
 
-    public InvoiceDetail(Integer id, Invoice invoice, Integer quantity, Package pack, Boolean active) {
+    public InvoiceDetail(Integer id, Invoice invoice, Integer quantity, Pack pack, Boolean active) {
         this.id = id;
         this.invoice = invoice;
         this.quantity = quantity;
@@ -76,22 +78,22 @@ public class InvoiceDetail implements java.io.Serializable {
         this.quantity = quantity;
     }
 
-    public Package getPack() {
+    public Pack getPack() {
         return pack;
     }
 
-    public void setPack(Package pack) {
+    public void setPack(Pack pack) {
         this.pack = pack;
     }
 
-    public Boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;

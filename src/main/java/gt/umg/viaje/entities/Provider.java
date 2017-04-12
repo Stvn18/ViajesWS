@@ -20,30 +20,23 @@ import javax.persistence.Table;
 @Entity()
 @Table()
 public class Provider implements java.io.Serializable {
+
+    private static final long serialVersionUID = -6270176477513275612L;
     
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    private String nit;
+    private String providerName;
     
-    private String name;
-    
-    private String address;
-    
-    private String phone;
-    
-    private Boolean active;
+    private boolean active;
 
     public Provider() {
     }
 
-    public Provider(Integer id, String nit, String name, String address, String phone, Boolean active) {
+    public Provider(Integer id, String providerName, boolean active) {
         this.id = id;
-        this.nit = nit;
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
+        this.providerName = providerName;
         this.active = active;
     }
 
@@ -55,55 +48,28 @@ public class Provider implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getNit() {
-        return nit;
+    public String getProviderName() {
+        return providerName;
     }
 
-    public void setNit(String nit) {
-        this.nit = nit;
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.id);
-        hash = 59 * hash + Objects.hashCode(this.nit);
-        hash = 59 * hash + Objects.hashCode(this.name);
-        hash = 59 * hash + Objects.hashCode(this.address);
-        hash = 59 * hash + Objects.hashCode(this.phone);
-        hash = 59 * hash + Objects.hashCode(this.active);
+        hash = 71 * hash + Objects.hashCode(this.id);
+        hash = 71 * hash + Objects.hashCode(this.providerName);
+        hash = 71 * hash + (this.active ? 1 : 0);
         return hash;
     }
 
@@ -119,30 +85,18 @@ public class Provider implements java.io.Serializable {
             return false;
         }
         final Provider other = (Provider) obj;
-        if (!Objects.equals(this.nit, other.nit)) {
+        if (this.active != other.active) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
+        if (!Objects.equals(this.providerName, other.providerName)) {
             return false;
         }
-        if (!Objects.equals(this.address, other.address)) {
-            return false;
-        }
-        if (!Objects.equals(this.phone, other.phone)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.active, other.active)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "Provider{" + "id=" + id + ", nit=" + nit + ", name=" + name + ", address=" + address + ", phone=" + phone + ", active=" + active + '}';
+        return "Provider{" + "id=" + id + ", providerName=" + providerName + ", active=" + active + '}';
     }
     
 }
