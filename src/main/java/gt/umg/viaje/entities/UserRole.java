@@ -16,8 +16,14 @@ import javax.persistence.Table;
 
 /**
  *
- * @author wilver
+ * @author Steven
  */
+
+/**
+ * 
+ * Entidad que contiene el rol con el usuario
+ */
+
 @Entity()
 @Table()
 public class UserRole implements java.io.Serializable {

@@ -30,7 +30,7 @@ public class UserSessionImpl implements UserSessionInte {
 
     @Autowired()
     UserRepo userRepo;
-    
+
     @Autowired()
     UserSessionRepo userSessionRepo;
 
@@ -45,9 +45,45 @@ public class UserSessionImpl implements UserSessionInte {
     }
 
     @Override
-    public ResponseEntity<UserSession> login(String name, String pass) throws Exception {
+    public ResponseEntity<UserSession> login(String email, String pass) throws Exception {
+
+        User us = userRepo.findByEmail(email);
+        UserSession userSession = new UserSession();
+
+        if (us == null) {
+            return new ResponseEntity("El Usuario No Existe", HttpStatus.NOT_FOUND);
+        }
+
+        if ("".equals(email)) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        if ("".equals(pass)) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        /**
+         * Comparamos los password encriptados
+         */
+        String encryptPassword = Md5Encrypt.get_md5(pass);
+
+        if (!us.getPassword().equals(encryptPassword)) {
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        }
+
+        Date fechaActual = new Date();
+
+        String infoToken = Integer.toString(us.getId()) + Long.toString(fechaActual.getTime());
+
+        String token = Md5Encrypt.get_md5(infoToken);
         
-        return new ResponseEntity(HttpStatus.CREATED);
+        userSession.setToken(token);
+        userSession.setStartDate(fechaActual);
+        userSession.setEndDate(fechaActual);
+        userSession.setUser(us);
+        
+        userSessionRepo.save(userSession);
+
+        return new ResponseEntity(userSession,HttpStatus.CREATED);
     }
 
 }

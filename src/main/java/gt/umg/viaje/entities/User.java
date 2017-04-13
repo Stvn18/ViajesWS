@@ -26,6 +26,12 @@ import javax.persistence.TemporalType;
  *
  * @author steven.vargas
  */
+
+/**
+ * 
+ * Entidad que contiene los datos del usuario
+ */
+
 @Entity()
 @Table()
 public class User implements java.io.Serializable {

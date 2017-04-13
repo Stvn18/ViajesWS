@@ -17,6 +17,12 @@ import javax.persistence.Table;
  * @author steven.vargas
  */
 
+/**
+ * 
+ * Esta entidad contendra el tipo de servicio que prestara el proveedor
+ * por ejemplo, Hoteleria, Vuelo, Crucero, Vehiculo
+ */
+
 @Entity()
 @Table()
 public class ProviderServiceType implements java.io.Serializable{

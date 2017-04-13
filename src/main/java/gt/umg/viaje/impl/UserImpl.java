@@ -8,6 +8,7 @@ package gt.umg.viaje.impl;
 import gt.umg.viaje.entities.User;
 import gt.umg.viaje.inte.UserInte;
 import gt.umg.viaje.repo.UserRepo;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,13 @@ public class UserImpl implements UserInte {
     }
 
     @Override
-    public ResponseEntity<User> findByName(String name) throws Exception {
+    public ResponseEntity<User> findByEmail(String email) throws Exception {
+        
+        User us = userRepo.findByEmail(email);
+        
+        if(us == null){
+            return new ResponseEntity("El Usuario No Existe", HttpStatus.NOT_FOUND);
+        }
         
         return new ResponseEntity(HttpStatus.OK);
 
@@ -41,6 +48,31 @@ public class UserImpl implements UserInte {
 
     @Override
     public ResponseEntity doCreate(String token, Integer userId, User user) throws Exception {
+        
+        User us = userRepo.findByEmail(user.getEmail());
+        
+        if(us != null){
+            return new ResponseEntity("El Usuario Ya Existe", HttpStatus.FOUND);
+        }
+        if("".equals(user.getEmail()) || user.getEmail() == null){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        if("".equals(user.getLastname()) || user.getLastname() == null){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        if("".equals(user.getName()) || user.getName() == null){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        if("".equals(user.getPassword()) || user.getPassword() == null){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        
+        user.setActive(true);
+        
+        Date fecha = new Date();
+        user.setCreatedAt(fecha);
+        
+        userRepo.save(user);
 
         return new ResponseEntity(user, HttpStatus.CREATED);
     }

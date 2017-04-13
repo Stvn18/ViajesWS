@@ -14,8 +14,14 @@ import javax.persistence.Table;
 
 /**
  *
- * @author wilver
+ * @author Steven
  */
+
+/**
+ * 
+ * En esta entidad, se almacenarán los roles de la aplicacion
+ */
+
 @Entity()
 @Table()
 public class Role implements java.io.Serializable {

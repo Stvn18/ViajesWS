@@ -21,6 +21,12 @@ import javax.persistence.Table;
  * @author steven.vargas
  */
 
+/**
+ * 
+ * Esta entidad contiene el detalle del paquete que eligio el cliente, por ejemplo,
+ * contendra los descuentos, subtotales, servicios que escogio,etc.
+ */
+
 @Entity()
 @Table()
 public class PackDetail implements java.io.Serializable{

@@ -29,9 +29,9 @@ public interface UserInte {
     public ResponseEntity<User> findAll() throws Exception;
     
     @Transactional(readOnly = true)
-    @RequestMapping(value = "/findByName", method = RequestMethod.GET)
-    public ResponseEntity<User> findByName(
-            @RequestParam(value = "name") String name
+    @RequestMapping(value = "/findByEmail", method = RequestMethod.GET)
+    public ResponseEntity<User> findByEmail(
+            @RequestParam(value = "email") String email
     ) throws Exception;
     
     @Transactional()
