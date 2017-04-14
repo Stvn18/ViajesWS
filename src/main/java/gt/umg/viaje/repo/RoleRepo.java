@@ -5,18 +5,15 @@
  */
 package gt.umg.viaje.repo;
 
-import gt.umg.viaje.entities.User;
+import gt.umg.viaje.entities.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author Steven
+ * @author wilver
  */
-
-@Repository()
-public interface UserRepo extends JpaRepository<User, Integer> {
+public interface RoleRepo extends JpaRepository<Role, Integer> {
     
-    User findByEmail(String email);
+    Role findByRoleName(String roleName);
     
 }

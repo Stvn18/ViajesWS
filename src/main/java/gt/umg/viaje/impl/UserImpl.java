@@ -5,15 +5,20 @@
  */
 package gt.umg.viaje.impl;
 
+import gt.umg.viaje.entities.Role;
 import gt.umg.viaje.entities.User;
+import gt.umg.viaje.entities.UserRole;
+import gt.umg.viaje.entities.builder.UserBuilder;
 import gt.umg.viaje.repo.UserRepo;
-import java.util.Date;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import gt.umg.viaje.inte.UserInt;
+import gt.umg.viaje.repo.RoleRepo;
+import gt.umg.viaje.security.Md5Encrypt;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -24,57 +29,43 @@ public class UserImpl implements UserInt {
 
     @Autowired()
     UserRepo userRepo;
+    
+    @Autowired()
+    RoleRepo roleRepo;
 
     @Override
-    public ResponseEntity<User> findAll() throws Exception {
+    public ResponseEntity<User> signUp(User user) throws Exception {
 
-        List<User> users = userRepo.findAll();
-
-        return new ResponseEntity(users, HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<User> findByEmail(String email) throws Exception {
-        
-        User us = userRepo.findByEmail(email);
-        
-        if(us == null){
-            return new ResponseEntity("El Usuario No Existe", HttpStatus.NOT_FOUND);
+        if (user.getEmail() != null && !"".equals(user.getEmail())) {
+            User userEntity = userRepo.findByEmail(user.getEmail());
+            
+            if(userEntity != null){
+                return new ResponseEntity(HttpStatus.FOUND);
+            }
         }
         
-        return new ResponseEntity(HttpStatus.OK);
-
-    }
-
-    @Override
-    public ResponseEntity doCreate(String token, Integer userId, User user) throws Exception {
+        /**
+         * Le asigna el rol por default
+         */
         
-        User us = userRepo.findByEmail(user.getEmail());
+        Role role = roleRepo.findByRoleName("Cliente");
         
-        if(us != null){
-            return new ResponseEntity("El Usuario Ya Existe", HttpStatus.FOUND);
-        }
-        if("".equals(user.getEmail()) || user.getEmail() == null){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-        if("".equals(user.getLastname()) || user.getLastname() == null){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-        if("".equals(user.getName()) || user.getName() == null){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-        if("".equals(user.getPassword()) || user.getPassword() == null){
+        if(role == null){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
         
-        user.setActive(true);
+        List<UserRole> roles  = new ArrayList<>();
+        roles.add(new UserRole(role, true));
         
-        Date fecha = new Date();
-        user.setCreatedAt(fecha);
+        User userEntity = new UserBuilder()
+                .setName(user.getName())
+                .setLastname(user.getLastname())
+                .setEmail(user.getEmail())
+                .setPassword(Md5Encrypt.get_md5(user.getPassword()))
+                .setRoles(roles)
+                .build();
         
-        userRepo.save(user);
-
-        return new ResponseEntity(user, HttpStatus.CREATED);
+        return new ResponseEntity(userRepo.save(userEntity), HttpStatus.CREATED);
     }
 
 }

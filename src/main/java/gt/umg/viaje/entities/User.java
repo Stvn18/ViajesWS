@@ -62,8 +62,7 @@ public class User implements java.io.Serializable {
     public User() {
     }
 
-    public User(Integer id, String name, String lastname, String email, String password, Date createdAt, boolean active) {
-        this.id = id;
+    public User(String name, String lastname, String email, String password, Date createdAt, boolean active) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
@@ -71,7 +70,7 @@ public class User implements java.io.Serializable {
         this.createdAt = createdAt;
         this.active = active;
     }
-
+    
     public Integer getId() {
         return id;
     }

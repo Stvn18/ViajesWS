@@ -9,10 +9,10 @@ import gt.umg.viaje.entities.User;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,21 +24,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/User", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 public interface UserInt {
     
-    @Transactional(readOnly = true)
-    @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    public ResponseEntity<User> findAll() throws Exception;
-    
-    @Transactional(readOnly = true)
-    @RequestMapping(value = "/findByEmail", method = RequestMethod.GET)
-    public ResponseEntity<User> findByEmail(
-            @RequestParam(value = "email") String email
+    /**
+     * Registra un nuevo usuario
+     * @param user
+     * @return
+     * @throws Exception 
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @RequestMapping(value = "/signUp", method = RequestMethod.POST)
+    public ResponseEntity<User> signUp(
+            @Validated() @RequestBody() User user
     ) throws Exception;
     
-    @Transactional()
-    @RequestMapping(value = {"", "/"}, method = RequestMethod.POST)
-    public ResponseEntity doCreate(
-            @RequestParam(value = "token", defaultValue = "") String token,
-            @RequestParam(value = "userId", defaultValue = "0") Integer userId,
-            @RequestBody() User user
-    ) throws Exception;   
 }

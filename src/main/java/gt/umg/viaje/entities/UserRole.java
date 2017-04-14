@@ -43,18 +43,13 @@ public class UserRole implements java.io.Serializable {
     public UserRole() {
     }
 
-    public UserRole(Integer id, Role role, boolean active) {
-        this.id = id;
+    public UserRole(Role role, boolean active) {
         this.role = role;
         this.active = active;
     }
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Role getRole() {
