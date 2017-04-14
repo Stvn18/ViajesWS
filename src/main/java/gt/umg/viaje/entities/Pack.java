@@ -20,6 +20,11 @@ import javax.persistence.TemporalType;
  * @author steven.vargas
  */
 
+/**
+ * 
+ * Esta entidad contendra el encabezado de los paquetes que esté escogiendo el cliente
+ */
+
 @Entity()
 @Table()
 public class Pack implements java.io.Serializable {
@@ -35,18 +40,32 @@ public class Pack implements java.io.Serializable {
     
     private Float total;
     
+    private Integer adults;
+    
+    private Integer children;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateDeparting;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateReturning;
+    
     private boolean active;
 
     public Pack() {
     }
 
-    public Pack(Integer id, Date createdAt, Float total, Boolean active) {
+    public Pack(Integer id, Date createdAt, Float total, Integer adults, Integer children, Date dateDeparting, Date dateReturning, boolean active) {
         this.id = id;
         this.createdAt = createdAt;
         this.total = total;
+        this.adults = adults;
+        this.children = children;
+        this.dateDeparting = dateDeparting;
+        this.dateReturning = dateReturning;
         this.active = active;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -62,13 +81,45 @@ public class Pack implements java.io.Serializable {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-    
+
     public Float getTotal() {
         return total;
     }
 
     public void setTotal(Float total) {
         this.total = total;
+    }
+
+    public Integer getAdults() {
+        return adults;
+    }
+
+    public void setAdults(Integer adults) {
+        this.adults = adults;
+    }
+
+    public Integer getChildren() {
+        return children;
+    }
+
+    public void setChildren(Integer children) {
+        this.children = children;
+    }
+
+    public Date getDateDeparting() {
+        return dateDeparting;
+    }
+
+    public void setDateDeparting(Date dateDeparting) {
+        this.dateDeparting = dateDeparting;
+    }
+
+    public Date getDateReturning() {
+        return dateReturning;
+    }
+
+    public void setDateReturning(Date dateReturning) {
+        this.dateReturning = dateReturning;
     }
 
     public boolean isActive() {
@@ -78,14 +129,19 @@ public class Pack implements java.io.Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.id);
-        hash = 29 * hash + Objects.hashCode(this.createdAt);
-        hash = 29 * hash + Objects.hashCode(this.total);
-        return 29 * hash + Objects.hashCode(this.active);
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        hash = 23 * hash + Objects.hashCode(this.createdAt);
+        hash = 23 * hash + Objects.hashCode(this.total);
+        hash = 23 * hash + Objects.hashCode(this.adults);
+        hash = 23 * hash + Objects.hashCode(this.children);
+        hash = 23 * hash + Objects.hashCode(this.dateDeparting);
+        hash = 23 * hash + Objects.hashCode(this.dateReturning);
+        hash = 23 * hash + (this.active ? 1 : 0);
+        return hash;
     }
 
     @Override
@@ -100,6 +156,9 @@ public class Pack implements java.io.Serializable {
             return false;
         }
         final Pack other = (Pack) obj;
+        if (this.active != other.active) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -109,12 +168,25 @@ public class Pack implements java.io.Serializable {
         if (!Objects.equals(this.total, other.total)) {
             return false;
         }
-        return Objects.equals(this.active, other.active);
+        if (!Objects.equals(this.adults, other.adults)) {
+            return false;
+        }
+        if (!Objects.equals(this.children, other.children)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateDeparting, other.dateDeparting)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateReturning, other.dateReturning)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Package{" + "id=" + id + ", date=" + createdAt + ", total=" + total + ", active=" + active + '}';
+        return "Pack{" + "id=" + id + ", createdAt=" + createdAt + ", total=" + total + ", adults=" + adults + ", children=" + children + ", dateDeparting=" + dateDeparting + ", dateReturning=" + dateReturning + ", active=" + active + '}';
     }
+
     
 }

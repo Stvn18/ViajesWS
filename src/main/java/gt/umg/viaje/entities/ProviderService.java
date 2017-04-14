@@ -23,6 +23,14 @@ import javax.persistence.Table;
  *
  * @author steven.vargas
  */
+
+/**
+ * 
+ * Esta entidad contiene los servicios que el proveedor prestara a la compañia
+ * contiene los nombres de los servicios a detalle, contiene especificaciones del
+ * servicio, precio, tipo de Servicio, etc
+ */
+
 @Entity()
 @Table()
 public class ProviderService implements java.io.Serializable {

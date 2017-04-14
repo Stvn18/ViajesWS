@@ -22,6 +22,12 @@ import javax.persistence.TemporalType;
  *
  * @author steven.vargas
  */
+
+/**
+ * 
+ * Esta entidad es el encabezado de la factura en las ventas que se realizan.
+ */
+
 @Entity()
 @Table()
 public class Invoice implements java.io.Serializable {

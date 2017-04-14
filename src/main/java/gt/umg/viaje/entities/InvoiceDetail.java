@@ -21,6 +21,11 @@ import javax.persistence.Table;
  * @author steven.vargas
  */
 
+/**
+ * 
+ * Esta entidad es el detalle de la factura de cada venta
+ */
+
 @Entity()
 @Table()
 public class InvoiceDetail implements java.io.Serializable {

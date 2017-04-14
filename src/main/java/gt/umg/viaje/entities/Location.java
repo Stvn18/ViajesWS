@@ -16,6 +16,13 @@ import javax.persistence.Table;
  *
  * @author steven.vargas
  */
+
+/**
+ * 
+ * Esta entidad contendra los paises (aeropuertos) de origen y destino que mostrara en los filtros
+ * al momento que empiecen a realizar su paquete
+ */
+
 @Entity()
 @Table()
 public class Location implements java.io.Serializable {

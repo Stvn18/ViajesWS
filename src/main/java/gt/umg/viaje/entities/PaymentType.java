@@ -17,6 +17,12 @@ import javax.persistence.Table;
  * @author steven.vargas
  */
 
+/**
+ * 
+ * Esta entidad contendra el tipo de pago con que el cliente realizara su pago,
+ * ejemplo sería, tipo de pago: Efectivo, Tarjeta Credito/Debito, PayPal, Bitcoins, Etc
+ */
+
 @Entity()
 @Table()
 public class PaymentType implements java.io.Serializable {

@@ -17,6 +17,12 @@ import javax.persistence.Table;
  * @author steven.vargas
  */
 
+/**
+ * 
+ * Esta entidad contendra el nombre del proveedor que está prestando sus servicios
+ * de Hoteleria, Crucero, Vuelo, Carro, Etc.
+ */
+
 @Entity()
 @Table()
 public class Provider implements java.io.Serializable {

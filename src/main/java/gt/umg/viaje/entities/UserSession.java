@@ -24,6 +24,12 @@ import javax.persistence.TemporalType;
  * @author steven.vargas
  */
 
+/**
+ * 
+ * Entidad donde se almacenará la sesión de cada usuario, guardando su token,
+ * fecha de inicio y fin.
+ */
+
 @Entity()
 @Table()
 public class UserSession implements java.io.Serializable{
