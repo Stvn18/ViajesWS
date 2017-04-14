@@ -7,27 +7,23 @@ package gt.umg.viaje.impl;
 
 import gt.umg.viaje.entities.User;
 import gt.umg.viaje.entities.UserSession;
-import gt.umg.viaje.inte.UserSessionInte;
 import gt.umg.viaje.repo.UserRepo;
 import gt.umg.viaje.repo.UserSessionRepo;
 import gt.umg.viaje.security.Md5Encrypt;
 import java.util.Date;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import gt.umg.viaje.inte.UserSessionInt;
 
 /**
  *
  * @author Steven
  */
 @Component()
-public class UserSessionImpl implements UserSessionInte {
-
-    Logger log = LoggerFactory.getLogger(this.getClass());
-
+public class UserSessionImpl implements UserSessionInt {
+    
     @Autowired()
     UserRepo userRepo;
 
@@ -45,45 +41,39 @@ public class UserSessionImpl implements UserSessionInte {
     }
 
     @Override
-    public ResponseEntity<UserSession> login(String email, String pass) throws Exception {
+    public ResponseEntity<UserSession> login(String email, String password) throws Exception {
 
-        User us = userRepo.findByEmail(email);
+        if (email == null || "".equals(email) || password == null || "".equals(password)) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        User user = userRepo.findByEmail(email);
+
+        if (user == null) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
         UserSession userSession = new UserSession();
-
-        if (us == null) {
-            return new ResponseEntity("El Usuario No Existe", HttpStatus.NOT_FOUND);
-        }
-
-        if ("".equals(email)) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-        if ("".equals(pass)) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
 
         /**
          * Comparamos los password encriptados
          */
-        String encryptPassword = Md5Encrypt.get_md5(pass);
-
-        if (!us.getPassword().equals(encryptPassword)) {
-            return new ResponseEntity(HttpStatus.ACCEPTED);
+        if (!user.getPassword().equals(Md5Encrypt.get_md5(password))) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
         Date fechaActual = new Date();
 
-        String infoToken = Integer.toString(us.getId()) + Long.toString(fechaActual.getTime());
+        String token = Integer.toString(user.getId()) + Long.toString(fechaActual.getTime());
 
-        String token = Md5Encrypt.get_md5(infoToken);
-        
-        userSession.setToken(token);
+        userSession.setToken(Md5Encrypt.get_md5(token));
         userSession.setStartDate(fechaActual);
         userSession.setEndDate(fechaActual);
-        userSession.setUser(us);
-        
+        userSession.setUser(user);
+
         userSessionRepo.save(userSession);
 
-        return new ResponseEntity(userSession,HttpStatus.CREATED);
+        return new ResponseEntity(userSession, HttpStatus.CREATED);
     }
 
 }

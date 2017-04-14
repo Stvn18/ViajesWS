@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController()
 @RequestMapping(value = "/api/User", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-public interface UserInte {
+public interface UserInt {
     
     @Transactional(readOnly = true)
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)

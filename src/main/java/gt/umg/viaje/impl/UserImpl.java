@@ -6,7 +6,6 @@
 package gt.umg.viaje.impl;
 
 import gt.umg.viaje.entities.User;
-import gt.umg.viaje.inte.UserInte;
 import gt.umg.viaje.repo.UserRepo;
 import java.util.Date;
 import java.util.List;
@@ -14,13 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import gt.umg.viaje.inte.UserInt;
 
 /**
  *
  * @author Steven
  */
 @Component()
-public class UserImpl implements UserInte {
+public class UserImpl implements UserInt {
 
     @Autowired()
     UserRepo userRepo;

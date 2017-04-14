@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController()
 @RequestMapping(value = "/api/UserSession", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-public interface UserSessionInte {
+public interface UserSessionInt {
 
     @Transactional(readOnly = true)
     @RequestMapping(value = "/isSessionValid", method = RequestMethod.GET)
@@ -35,11 +35,18 @@ public interface UserSessionInte {
             @RequestParam(value = "userId", defaultValue = "0") Integer userId
     ) throws Exception;
     
-    @Transactional()
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    /**
+     * Realiza login
+     * @param email
+     * @param password
+     * @return
+     * @throws Exception 
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<UserSession> login(
             @RequestParam(value = "email", defaultValue = "") String email,
-            @RequestParam(value = "pass", defaultValue = "") String pass
+            @RequestParam(value = "password", defaultValue = "") String password
     ) throws Exception;
 
 }
