@@ -41,22 +41,21 @@ public class ProviderService implements java.io.Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn()
     private Provider provider;
-
+    
     private String serviceName;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn()
     private ProviderServiceType providerServiceType;
 
     private Float price;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "providerService_id")
-    List<ProviderServiceSpecification> specifications = new ArrayList<>();
-
+    
+    @ManyToOne()
+    private Location location;
+    
     private boolean active;
 
     public ProviderService() {
@@ -111,12 +110,12 @@ public class ProviderService implements java.io.Serializable {
         this.price = price;
     }
 
-    public List<ProviderServiceSpecification> getSpecifications() {
-        return specifications;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setSpecifications(List<ProviderServiceSpecification> specifications) {
-        this.specifications = specifications;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public boolean isActive() {
@@ -129,14 +128,14 @@ public class ProviderService implements java.io.Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.provider);
-        hash = 89 * hash + Objects.hashCode(this.serviceName);
-        hash = 89 * hash + Objects.hashCode(this.providerServiceType);
-        hash = 89 * hash + Objects.hashCode(this.price);
-        hash = 89 * hash + Objects.hashCode(this.specifications);
-        hash = 89 * hash + (this.active ? 1 : 0);
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.provider);
+        hash = 29 * hash + Objects.hashCode(this.serviceName);
+        hash = 29 * hash + Objects.hashCode(this.providerServiceType);
+        hash = 29 * hash + Objects.hashCode(this.price);
+        hash = 29 * hash + Objects.hashCode(this.location);
+        hash = 29 * hash + (this.active ? 1 : 0);
         return hash;
     }
 
@@ -170,12 +169,12 @@ public class ProviderService implements java.io.Serializable {
         if (!Objects.equals(this.price, other.price)) {
             return false;
         }
-        return Objects.equals(this.specifications, other.specifications);
+        return Objects.equals(this.location, other.location);
     }
 
     @Override
     public String toString() {
-        return "ProviderService{" + "id=" + id + ", provider=" + provider + ", serviceName=" + serviceName + ", providerServiceType=" + providerServiceType + ", price=" + price + ", specifications=" + specifications + ", active=" + active + '}';
+        return "ProviderService{" + "id=" + id + ", provider=" + provider + ", serviceName=" + serviceName + ", providerServiceType=" + providerServiceType + ", price=" + price + ", location=" + location + ", active=" + active + '}';
     }
     
 }

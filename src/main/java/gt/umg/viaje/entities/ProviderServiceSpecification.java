@@ -6,13 +6,10 @@
 package gt.umg.viaje.entities;
 
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -24,7 +21,7 @@ import javax.persistence.Table;
 @Entity()
 @Table()
 public class ProviderServiceSpecification implements java.io.Serializable {
-
+    
     private static final long serialVersionUID = -8830996328193991438L;
     
     @Id()
@@ -32,15 +29,21 @@ public class ProviderServiceSpecification implements java.io.Serializable {
     private Integer id;
     
     @ManyToOne()
-    @JoinColumn()
-    private SpecificationTypeValue specificationTypeValue;
-
+    private SpecificationType specificationType;
+    
+    private String specificationValue;
+    
+    @ManyToOne()
+    private ProviderService providerService;
+    
     public ProviderServiceSpecification() {
     }
 
-    public ProviderServiceSpecification(Integer id, SpecificationTypeValue specificationTypeValue) {
+    public ProviderServiceSpecification(Integer id, SpecificationType specificationType, String specificationValue, ProviderService providerService) {
         this.id = id;
-        this.specificationTypeValue = specificationTypeValue;
+        this.specificationType = specificationType;
+        this.specificationValue = specificationValue;
+        this.providerService = providerService;
     }
 
     public Integer getId() {
@@ -51,19 +54,37 @@ public class ProviderServiceSpecification implements java.io.Serializable {
         this.id = id;
     }
 
-    public SpecificationTypeValue getSpecificationTypeValue() {
-        return specificationTypeValue;
+    public SpecificationType getSpecificationType() {
+        return specificationType;
     }
 
-    public void setSpecificationTypeValue(SpecificationTypeValue specificationTypeValue) {
-        this.specificationTypeValue = specificationTypeValue;
+    public void setSpecificationType(SpecificationType specificationType) {
+        this.specificationType = specificationType;
+    }
+
+    public String getSpecificationValue() {
+        return specificationValue;
+    }
+
+    public void setSpecificationValue(String specificationValue) {
+        this.specificationValue = specificationValue;
+    }
+
+    public ProviderService getProviderService() {
+        return providerService;
+    }
+
+    public void setProviderService(ProviderService providerService) {
+        this.providerService = providerService;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 19 * hash + Objects.hashCode(this.id);
-        hash = 19 * hash + Objects.hashCode(this.specificationTypeValue);
+        int hash = 3;
+        hash = 11 * hash + Objects.hashCode(this.id);
+        hash = 11 * hash + Objects.hashCode(this.specificationType);
+        hash = 11 * hash + Objects.hashCode(this.specificationValue);
+        hash = 11 * hash + Objects.hashCode(this.providerService);
         return hash;
     }
 
@@ -79,15 +100,21 @@ public class ProviderServiceSpecification implements java.io.Serializable {
             return false;
         }
         final ProviderServiceSpecification other = (ProviderServiceSpecification) obj;
+        if (!Objects.equals(this.specificationValue, other.specificationValue)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        return Objects.equals(this.specificationTypeValue, other.specificationTypeValue);
+        if (!Objects.equals(this.specificationType, other.specificationType)) {
+            return false;
+        }
+        return Objects.equals(this.providerService, other.providerService);
     }
 
     @Override
     public String toString() {
-        return "ProviderServiceSpecificationValue{" + "id=" + id + ", specificationTypeValue=" + specificationTypeValue + '}';
+        return "ProviderServiceSpecification{" + "id=" + id + ", specificationType=" + specificationType + ", SpecificationValue=" + specificationValue + ", providerService=" + providerService + '}';
     }
     
 }
