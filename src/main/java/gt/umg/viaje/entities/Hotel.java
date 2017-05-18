@@ -5,15 +5,14 @@
  */
 package gt.umg.viaje.entities;
 
-import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -35,18 +34,23 @@ public class Hotel implements java.io.Serializable{
     private String nit;
     
     private Boolean active;
+    
+    @ManyToOne()
+    @JoinColumn()
+    private Location location;
 
     public Hotel() {
     }
 
-    public Hotel(Integer id, String name, String coordinate, String nit, Boolean active) {
+    public Hotel(Integer id, String name, String coordinate, String nit, Boolean active, Location location) {
         this.id = id;
         this.name = name;
         this.coordinate = coordinate;
         this.nit = nit;
         this.active = active;
+        this.location = location;
     }
-
+    
     public Integer getId() {
         return id;
     }
@@ -87,14 +91,23 @@ public class Hotel implements java.io.Serializable{
         this.active = active;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.id);
-        hash = 71 * hash + Objects.hashCode(this.name);
-        hash = 71 * hash + Objects.hashCode(this.coordinate);
-        hash = 71 * hash + Objects.hashCode(this.nit);
-        hash = 71 * hash + Objects.hashCode(this.active);
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.coordinate);
+        hash = 59 * hash + Objects.hashCode(this.nit);
+        hash = 59 * hash + Objects.hashCode(this.active);
+        hash = 59 * hash + Objects.hashCode(this.location);
         return hash;
     }
 
@@ -125,12 +138,12 @@ public class Hotel implements java.io.Serializable{
         if (!Objects.equals(this.active, other.active)) {
             return false;
         }
-        return true;
+        return Objects.equals(this.location, other.location);
     }
 
     @Override
     public String toString() {
-        return "Hotel{" + "id=" + id + ", name=" + name + ", coordinate=" + coordinate + ", nit=" + nit + ", active=" + active + '}';
+        return "Hotel{" + "id=" + id + ", name=" + name + ", coordinate=" + coordinate + ", nit=" + nit + ", active=" + active + ", location=" + location + '}';
     }
-        
+    
 }

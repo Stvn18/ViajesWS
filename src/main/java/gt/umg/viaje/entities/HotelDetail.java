@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,9 +28,7 @@ public class HotelDetail implements java.io.Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    private String countryGo;
-
+    
     @Temporal(TemporalType.DATE)
     private Date dateIn;
 
@@ -46,13 +46,16 @@ public class HotelDetail implements java.io.Serializable {
     private Float price;
 
     private Boolean active;
+    
+    @ManyToOne()
+    @JoinColumn()
+    private Hotel hotel;
 
     public HotelDetail() {
     }
 
-    public HotelDetail(Integer id, String countryGo, Date dateIn, Date dateOut, Integer childrens, Integer adults, Integer bedrooms, String description, Float price, Boolean active) {
+    public HotelDetail(Integer id, Date dateIn, Date dateOut, Integer childrens, Integer adults, Integer bedrooms, String description, Float price, Boolean active) {
         this.id = id;
-        this.countryGo = countryGo;
         this.dateIn = dateIn;
         this.dateOut = dateOut;
         this.childrens = childrens;
@@ -62,21 +65,13 @@ public class HotelDetail implements java.io.Serializable {
         this.price = price;
         this.active = active;
     }
-
+    
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getCountryGo() {
-        return countryGo;
-    }
-
-    public void setCountryGo(String countryGo) {
-        this.countryGo = countryGo;
     }
 
     public Date getDateIn() {
@@ -143,19 +138,27 @@ public class HotelDetail implements java.io.Serializable {
         this.active = active;
     }
 
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.id);
-        hash = 79 * hash + Objects.hashCode(this.countryGo);
-        hash = 79 * hash + Objects.hashCode(this.dateIn);
-        hash = 79 * hash + Objects.hashCode(this.dateOut);
-        hash = 79 * hash + Objects.hashCode(this.childrens);
-        hash = 79 * hash + Objects.hashCode(this.adults);
-        hash = 79 * hash + Objects.hashCode(this.bedrooms);
-        hash = 79 * hash + Objects.hashCode(this.description);
-        hash = 79 * hash + Objects.hashCode(this.price);
-        hash = 79 * hash + Objects.hashCode(this.active);
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.dateIn);
+        hash = 37 * hash + Objects.hashCode(this.dateOut);
+        hash = 37 * hash + Objects.hashCode(this.childrens);
+        hash = 37 * hash + Objects.hashCode(this.adults);
+        hash = 37 * hash + Objects.hashCode(this.bedrooms);
+        hash = 37 * hash + Objects.hashCode(this.description);
+        hash = 37 * hash + Objects.hashCode(this.price);
+        hash = 37 * hash + Objects.hashCode(this.active);
+        hash = 37 * hash + Objects.hashCode(this.hotel);
         return hash;
     }
 
@@ -171,9 +174,6 @@ public class HotelDetail implements java.io.Serializable {
             return false;
         }
         final HotelDetail other = (HotelDetail) obj;
-        if (!Objects.equals(this.countryGo, other.countryGo)) {
-            return false;
-        }
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
@@ -201,12 +201,15 @@ public class HotelDetail implements java.io.Serializable {
         if (!Objects.equals(this.active, other.active)) {
             return false;
         }
+        if (!Objects.equals(this.hotel, other.hotel)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "HotelDetail{" + "id=" + id + ", countryGo=" + countryGo + ", dateIn=" + dateIn + ", dateOut=" + dateOut + ", childrens=" + childrens + ", adults=" + adults + ", bedrooms=" + bedrooms + ", description=" + description + ", price=" + price + ", active=" + active + '}';
+        return "HotelDetail{" + "id=" + id + ", dateIn=" + dateIn + ", dateOut=" + dateOut + ", childrens=" + childrens + ", adults=" + adults + ", bedrooms=" + bedrooms + ", description=" + description + ", price=" + price + ", active=" + active + ", hotel=" + hotel + '}';
     }
-       
+    
 }
