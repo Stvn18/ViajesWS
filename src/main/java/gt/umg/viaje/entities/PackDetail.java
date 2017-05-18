@@ -41,9 +41,9 @@ public class PackDetail implements java.io.Serializable{
     @JoinColumn()
     private Pack pack;
     
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn()
-    private ProviderService providerDetail;
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinColumn()
+//    private ProviderService providerDetail;
     
     private Float total;
     
@@ -54,10 +54,10 @@ public class PackDetail implements java.io.Serializable{
     public PackDetail() {
     }
 
-    public PackDetail(Integer id, Pack pack, ProviderService providerDetail, Float total, Float discount, boolean active) {
+    public PackDetail(Integer id, Pack pack,  Float total, Float discount, boolean active) {
         this.id = id;
         this.pack = pack;
-        this.providerDetail = providerDetail;
+//        this.providerDetail = providerDetail;
         this.total = total;
         this.discount = discount;
         this.active = active;
@@ -79,13 +79,13 @@ public class PackDetail implements java.io.Serializable{
         this.pack = pack;
     }
 
-    public ProviderService getProviderDetail() {
-        return providerDetail;
-    }
-
-    public void setProviderDetail(ProviderService providerDetail) {
-        this.providerDetail = providerDetail;
-    }
+//    public ProviderService getProviderDetail() {
+//        return providerDetail;
+//    }
+//
+//    public void setProviderDetail(ProviderService providerDetail) {
+//        this.providerDetail = providerDetail;
+//    }
 
     public Float getTotal() {
         return total;
@@ -116,7 +116,7 @@ public class PackDetail implements java.io.Serializable{
         int hash = 3;
         hash = 41 * hash + Objects.hashCode(this.id);
         hash = 41 * hash + Objects.hashCode(this.pack);
-        hash = 41 * hash + Objects.hashCode(this.providerDetail);
+//        hash = 41 * hash + Objects.hashCode(this.providerDetail);
         hash = 41 * hash + Objects.hashCode(this.total);
         hash = 41 * hash + Objects.hashCode(this.discount);
         return 41 * hash + Objects.hashCode(this.active);
@@ -140,9 +140,9 @@ public class PackDetail implements java.io.Serializable{
         if (!Objects.equals(this.pack, other.pack)) {
             return false;
         }
-        if (!Objects.equals(this.providerDetail, other.providerDetail)) {
-            return false;
-        }
+//        if (!Objects.equals(this.providerDetail, other.providerDetail)) {
+//            return false;
+//        }
         if (!Objects.equals(this.total, other.total)) {
             return false;
         }
@@ -154,7 +154,7 @@ public class PackDetail implements java.io.Serializable{
 
     @Override
     public String toString() {
-        return "PackageDetail{" + "id=" + id + ", packD=" + pack + ", providerDetail=" + providerDetail + ", total=" + total + ", discount=" + discount + ", active=" + active + '}';
+        return "PackDetail{" + "id=" + id + ", pack=" + pack + ", total=" + total + ", discount=" + discount + ", active=" + active + '}';
     }
     
 }
