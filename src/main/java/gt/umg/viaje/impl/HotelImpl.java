@@ -30,7 +30,7 @@ public class HotelImpl implements HotelInt {
         Date dateIn = new Date(lDateIn);
         Date dateOut = new Date(lDateOut);
         
-        return new ResponseEntity(hotelDetailRepo.getDisponibles(locationId, childrens, adults, bedrooms, dateIn, dateOut), HttpStatus.OK);
+        return new ResponseEntity(hotelDetailRepo.getDisponibles(locationId, childrens, adults, bedrooms), HttpStatus.OK);
     }
     
 }

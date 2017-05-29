@@ -5,62 +5,97 @@
  */
 package gt.umg.viaje.entities;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author steven.vargas
  */
-
 @Entity()
 @Table()
-public class Flight implements java.io.Serializable{
+public class Flight extends GenericEntity {
+
+    private static final long serialVersionUID = 8077182988314580350L;
     
-    @Id()
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @ManyToOne()
+    private Location flyingFrom;
+
+    @ManyToOne()
+    private Location flyingTo;
     
-    private String name;
+    @ManyToOne()
+    private FlightPreferredClass preferredClass;
+    
+    @ManyToOne()
+    private Airline airline;
     
     private String description;
     
-    private String airline;
+    @Column(precision = 18, scale = 2)
+    private BigDecimal adultPrice;
     
-    private Float price;
+    @Column(precision = 18, scale = 2)
+    private BigDecimal childPrice;
     
-    private Boolean active;
-
+    @Temporal(TemporalType.TIME)
+    private Date departureTime;
+    
+    @Temporal(TemporalType.TIME)
+    private Date arrivalTime;
+    
     public Flight() {
     }
 
-    public Flight(Integer id, String name, String description, String airline, Float price, Boolean active) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
+    public Flight(Location flyingFrom, Location flyingTo, FlightPreferredClass preferredClass, Airline airline, String description, BigDecimal adultPrice, BigDecimal childPrice, Date departureTime, Date arrivalTime) {
+        this.flyingFrom = flyingFrom;
+        this.flyingTo = flyingTo;
+        this.preferredClass = preferredClass;
         this.airline = airline;
-        this.price = price;
-        this.active = active;
+        this.description = description;
+        this.adultPrice = adultPrice;
+        this.childPrice = childPrice;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
     }
 
-    public Integer getId() {
-        return id;
+    public Location getFlyingFrom() {
+        return flyingFrom;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setFlyingFrom(Location flyingFrom) {
+        this.flyingFrom = flyingFrom;
     }
 
-    public String getName() {
-        return name;
+    public Location getFlyingTo() {
+        return flyingTo;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFlyingTo(Location flyingTo) {
+        this.flyingTo = flyingTo;
+    }
+
+    public FlightPreferredClass getPreferredClass() {
+        return preferredClass;
+    }
+
+    public void setPreferredClass(FlightPreferredClass preferredClass) {
+        this.preferredClass = preferredClass;
+    }
+
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
     }
 
     public String getDescription() {
@@ -71,39 +106,50 @@ public class Flight implements java.io.Serializable{
         this.description = description;
     }
 
-    public String getAirline() {
-        return airline;
+    public BigDecimal getAdultPrice() {
+        return adultPrice;
     }
 
-    public void setAirline(String airline) {
-        this.airline = airline;
+    public void setAdultPrice(BigDecimal adultPrice) {
+        this.adultPrice = adultPrice;
     }
 
-    public Float getPrice() {
-        return price;
+    public BigDecimal getChildPrice() {
+        return childPrice;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setChildPrice(BigDecimal childPrice) {
+        this.childPrice = childPrice;
     }
 
-    public Boolean getActive() {
-        return active;
+    public Date getDepartureTime() {
+        return departureTime;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setDepartureTime(Date departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public Date getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(Date arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.name);
-        hash = 53 * hash + Objects.hashCode(this.description);
-        hash = 53 * hash + Objects.hashCode(this.airline);
-        hash = 53 * hash + Objects.hashCode(this.price);
-        hash = 53 * hash + Objects.hashCode(this.active);
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.flyingFrom);
+        hash = 79 * hash + Objects.hashCode(this.flyingTo);
+        hash = 79 * hash + Objects.hashCode(this.preferredClass);
+        hash = 79 * hash + Objects.hashCode(this.airline);
+        hash = 79 * hash + Objects.hashCode(this.description);
+        hash = 79 * hash + Objects.hashCode(this.adultPrice);
+        hash = 79 * hash + Objects.hashCode(this.childPrice);
+        hash = 79 * hash + Objects.hashCode(this.departureTime);
+        hash = 79 * hash + Objects.hashCode(this.arrivalTime);
         return hash;
     }
 
@@ -119,30 +165,31 @@ public class Flight implements java.io.Serializable{
             return false;
         }
         final Flight other = (Flight) obj;
-        if (!Objects.equals(this.name, other.name)) {
+        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.description, other.description)) {
+        if (!Objects.equals(this.flyingFrom, other.flyingFrom)) {
+            return false;
+        }
+        if (!Objects.equals(this.flyingTo, other.flyingTo)) {
+            return false;
+        }
+        if (!Objects.equals(this.preferredClass, other.preferredClass)) {
             return false;
         }
         if (!Objects.equals(this.airline, other.airline)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.adultPrice, other.adultPrice)) {
             return false;
         }
-        if (!Objects.equals(this.price, other.price)) {
+        if (!Objects.equals(this.childPrice, other.childPrice)) {
             return false;
         }
-        if (!Objects.equals(this.active, other.active)) {
+        if (!Objects.equals(this.departureTime, other.departureTime)) {
             return false;
         }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Flight{" + "id=" + id + ", name=" + name + ", description=" + description + ", airline=" + airline + ", price=" + price + ", active=" + active + '}';
+        return Objects.equals(this.arrivalTime, other.arrivalTime);
     }
     
 }
