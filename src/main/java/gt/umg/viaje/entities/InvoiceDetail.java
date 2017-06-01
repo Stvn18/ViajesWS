@@ -6,15 +6,9 @@
 package gt.umg.viaje.entities;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -33,38 +27,24 @@ import javax.persistence.Table;
 public class InvoiceDetail extends GenericEntity {
     
     private static final long serialVersionUID = -5216497945705017438L;
-    
-    @ManyToOne()
-    private Invoice invoice;
-    
+        
     private Integer quantity;
     
-    @Column(scale = 18, precision = 2)
-    private BigDecimal unitPrice;
+    private Float unitPrice;
     
-    @Column(scale = 18, precision = 2)
-    private BigDecimal subTotal;
+    private Float subTotal;
     
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     private Product product;
 
     public InvoiceDetail() {
     }
 
-    public InvoiceDetail(Invoice invoice, Integer quantity, BigDecimal unitPrice, BigDecimal subTotal, Product product) {
-        this.invoice = invoice;
+    public InvoiceDetail(Integer quantity, Float unitPrice, Float subTotal, Product product) {
         this.quantity = quantity;
         this.unitPrice = unitPrice;
         this.subTotal = subTotal;
         this.product = product;
-    }
-    
-    public Invoice getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
     }
 
     public Integer getQuantity() {
@@ -75,19 +55,19 @@ public class InvoiceDetail extends GenericEntity {
         this.quantity = quantity;
     }
 
-    public BigDecimal getUnitPrice() {
+    public Float getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
+    public void setUnitPrice(Float unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public BigDecimal getSubTotal() {
+    public Float getSubTotal() {
         return subTotal;
     }
 
-    public void setSubTotal(BigDecimal subTotal) {
+    public void setSubTotal(Float subTotal) {
         this.subTotal = subTotal;
     }
 
@@ -101,7 +81,8 @@ public class InvoiceDetail extends GenericEntity {
 
     @Override
     public String toString() {
-        return "InvoiceDetail{" + "invoice=" + invoice + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", subTotal=" + subTotal + ", product=" + product + '}';
+        return "InvoiceDetail{" + "quantity=" + quantity + ", unitPrice=" + unitPrice + ", subTotal=" + subTotal + ", product=" + product + '}';
     }
+
     
 }

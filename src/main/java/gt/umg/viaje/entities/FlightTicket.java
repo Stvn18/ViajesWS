@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
  */
 @Table()
 @Entity()
-public class FlightTcket extends GenericEntity {
+public class FlightTicket extends GenericEntity {
     
     private static final long serialVersionUID = 7082404985039687326L;
     
@@ -29,10 +29,10 @@ public class FlightTcket extends GenericEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateFlight;
     
-    public FlightTcket() {
+    public FlightTicket() {
     }
 
-    public FlightTcket(Flight flight, Date dateFlight) {
+    public FlightTicket(Flight flight, Date dateFlight) {
         this.flight = flight;
         this.dateFlight = dateFlight;
     }
@@ -72,7 +72,7 @@ public class FlightTcket extends GenericEntity {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final FlightTcket other = (FlightTcket) obj;
+        final FlightTicket other = (FlightTicket) obj;
         if (!Objects.equals(this.flight, other.flight)) {
             return false;
         }

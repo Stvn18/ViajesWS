@@ -5,39 +5,28 @@
  */
 package gt.umg.viaje.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 /**
  *
  * @author wilver
  */
-@Table()
-@Entity()
-public class ProductType extends GenericEntity {
+public enum ProductType {
 
-    private static final long serialVersionUID = 6182111738210939152L;
-    
-    private String name;
+    VUELO(1, "Vuelos"), HOTEL(2, "Hoteles"), CRUCERO(3, "Cruceros"), CARRO(4, "Carros");
 
-    public ProductType() {
+    private final int id;
+    private final String description;
+
+    private ProductType(int id, String description) {
+        this.id = id;
+        this.description = description;
     }
 
-    public ProductType(String name) {
-        this.name = name;
+    public int getId() {
+        return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    @Override
-    public String toString() {
-        return "ProductType{" + "name=" + name + '}';
+    public String getDescription() {
+        return description;
     }
     
 }

@@ -5,10 +5,9 @@
  */
 package gt.umg.viaje.entities;
 
-import java.math.BigDecimal;
+import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -39,22 +38,18 @@ public class Flight extends GenericEntity {
     
     private String description;
     
-    @Column(precision = 18, scale = 2)
-    private BigDecimal adultPrice;
+    private Float adultPrice;
     
-    @Column(precision = 18, scale = 2)
-    private BigDecimal childPrice;
+    private Float childPrice;
     
-    @Temporal(TemporalType.TIME)
-    private Date departureTime;
+    private Time departureTime;
     
-    @Temporal(TemporalType.TIME)
-    private Date arrivalTime;
+    private Time arrivalTime;
     
     public Flight() {
     }
 
-    public Flight(Location flyingFrom, Location flyingTo, FlightPreferredClass preferredClass, Airline airline, String description, BigDecimal adultPrice, BigDecimal childPrice, Date departureTime, Date arrivalTime) {
+    public Flight(Location flyingFrom, Location flyingTo, FlightPreferredClass preferredClass, Airline airline, String description, Float adultPrice, Float childPrice, Time departureTime, Time arrivalTime) {
         this.flyingFrom = flyingFrom;
         this.flyingTo = flyingTo;
         this.preferredClass = preferredClass;
@@ -106,38 +101,38 @@ public class Flight extends GenericEntity {
         this.description = description;
     }
 
-    public BigDecimal getAdultPrice() {
+    public Float getAdultPrice() {
         return adultPrice;
     }
 
-    public void setAdultPrice(BigDecimal adultPrice) {
+    public void setAdultPrice(Float adultPrice) {
         this.adultPrice = adultPrice;
     }
 
-    public BigDecimal getChildPrice() {
+    public Float getChildPrice() {
         return childPrice;
     }
 
-    public void setChildPrice(BigDecimal childPrice) {
+    public void setChildPrice(Float childPrice) {
         this.childPrice = childPrice;
     }
 
-    public Date getDepartureTime() {
+    public Time getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(Date departureTime) {
+    public void setDepartureTime(Time departureTime) {
         this.departureTime = departureTime;
     }
 
-    public Date getArrivalTime() {
+    public Time getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(Date arrivalTime) {
+    public void setArrivalTime(Time arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 3;

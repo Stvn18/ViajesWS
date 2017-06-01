@@ -5,21 +5,15 @@
  */
 package gt.umg.viaje.repo;
 
-import gt.umg.viaje.entities.User;
-import gt.umg.viaje.entities.UserSession;
+import gt.umg.viaje.entities.InvoiceDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author Steven
+ * @author wilver
  */
-
 @Repository()
-public interface UserSessionRepo extends JpaRepository<UserSession, Integer> {
-    
-    UserSession findByTokenAndUser(String token, User user);
-    
-    UserSession findByToken(String token);
+public interface InvoiceDetailRepo extends JpaRepository<InvoiceDetail, Integer> {
     
 }

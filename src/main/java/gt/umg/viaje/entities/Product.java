@@ -5,8 +5,12 @@
  */
 package gt.umg.viaje.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,21 +20,17 @@ import javax.persistence.Table;
 @Table()
 @Entity()
 public class Product extends GenericEntity {
-
+    
     private static final long serialVersionUID = -612286601122230995L;
     
-    @ManyToOne()
+    @Enumerated(EnumType.ORDINAL)
     private ProductType productType;
     
-    @ManyToOne()
-    private FlightTcket flightTcket;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(nullable = true)
+    private FlightTicket flightTicket;
 
     public Product() {
-    }
-
-    public Product(ProductType productType, FlightTcket flightTcket) {
-        this.productType = productType;
-        this.flightTcket = flightTcket;
     }
 
     public ProductType getProductType() {
@@ -41,17 +41,12 @@ public class Product extends GenericEntity {
         this.productType = productType;
     }
 
-    public FlightTcket getFlightTcket() {
-        return flightTcket;
+    public FlightTicket getFlightTicket() {
+        return flightTicket;
     }
 
-    public void setFlightTcket(FlightTcket flightTcket) {
-        this.flightTcket = flightTcket;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" + "productType=" + productType + ", flightTcket=" + flightTcket + '}';
+    public void setFlightTicket(FlightTicket flightTicket) {
+        this.flightTicket = flightTicket;
     }
     
 }

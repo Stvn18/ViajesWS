@@ -23,8 +23,7 @@ public interface FlightRepo extends JpaRepository<Flight, Integer> {
             + " where f.flyingFrom.id = :flyingFromId "
             + " and f.flyingTo.id = :flyingToId "
             + " and f.preferredClass.id = :preferredClassId "
-            + " and f.airline.id = :airlineId "
-            + " order by f.price, f.departingDate asc ")
+            + " and f.airline.id = :airlineId ")
     List<Flight> getVuelosDisponibles(@Param("flyingFromId") Integer flyingFromId, @Param("flyingToId") Integer flyingToId, @Param("preferredClassId") Integer preferredClassId, @Param("airlineId") Integer airlineId);
     
 }

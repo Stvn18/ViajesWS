@@ -5,50 +5,28 @@
  */
 package gt.umg.viaje.entities;
 
-import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 /**
  *
- * @author steven.vargas
+ * @author wilver
  */
-
-/**
- * 
- * Esta entidad contendra el tipo de pago con que el cliente realizara su pago,
- * ejemplo sería, tipo de pago: Efectivo, Tarjeta Credito/Debito, PayPal, Bitcoins, Etc
- */
-
-@Entity()
-@Table()
-public class PaymentType extends GenericEntity {
-
-    private static final long serialVersionUID = -231391740474990969L;
+public enum PaymentType {
     
-    private String paymentTypeName;
+    VISA(1, "Visa"), MASTERCARD(2, "Mastercard"), AMERICAN_EXPRESS(3, "American express"), VISA_ELECTRON(4, "Visa electron");
 
-    public PaymentType() {
+    private final int id;
+    private final String description;
+
+    private PaymentType(int id, String description) {
+        this.id = id;
+        this.description = description;
     }
 
-    public PaymentType(String paymentTypeName) {
-        this.paymentTypeName = paymentTypeName;
+    public int getId() {
+        return id;
     }
 
-    public String getPaymentTypeName() {
-        return paymentTypeName;
-    }
-
-    public void setPaymentTypeName(String paymentTypeName) {
-        this.paymentTypeName = paymentTypeName;
-    }
-
-    @Override
-    public String toString() {
-        return "PaymentType{" + "paymentTypeName=" + paymentTypeName + '}';
+    public String getDescription() {
+        return description;
     }
     
 }
