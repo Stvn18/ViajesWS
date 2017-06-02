@@ -29,5 +29,11 @@ public interface InvoiceInt {
             @RequestParam(value = "token", defaultValue = "") String token,
             @RequestBody() Invoice invoice
     ) throws Exception;
+    
+    @Transactional(readOnly = true)
+    @RequestMapping(value = "/findByUser", method = RequestMethod.GET)
+    ResponseEntity<Invoice> onFindByUser(
+            @RequestParam(value = "token", defaultValue = "") String token
+    ) throws Exception;
 
 }
